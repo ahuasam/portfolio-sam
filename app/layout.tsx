@@ -1,29 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Instrument_Serif, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--ff-serif" });
+const sans = Geist({ subsets: ["latin"], variable: "--ff-sans" });
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--ff-mono" });
 
 export const viewport: Viewport = {
-  themeColor: "#020209",
+  themeColor: "#ecebe7",
 };
 
 export const metadata: Metadata = {
-  title: "AHUA ANOH AUGUSTE SAMUEL | Digital Business Developer & Expert IA",
+  title: "Samuel Ahua — Développeur web & solutions IA, Abidjan",
   description:
-    "Portfolio professionnel de AHUA ANOH AUGUSTE SAMUEL — Digital Business Developer, Développeur Web, Ingénieur Informatique, Expert IA. Solutions digitales innovantes pour entreprises.",
+    "AHUA ANOH Auguste Samuel, ingénieur informatique basé à Abidjan. Sites web, applications, outils d'intelligence artificielle et identité visuelle pour les entreprises.",
   keywords:
-    "développeur web, expert IA, ingénieur informatique, digital business, Côte d'Ivoire, portfolio, intelligence artificielle",
+    "développeur web Abidjan, expert IA Côte d'Ivoire, ingénieur informatique, création site web, chatbot, Samuel Ahua",
   openGraph: {
-    title: "AHUA ANOH AUGUSTE SAMUEL | Expert IA & Développeur Web",
-    description: "Portfolio professionnel — Solutions digitales et IA pour entreprises",
+    title: "Samuel Ahua — Développeur web & solutions IA",
+    description: "Sites, applications et outils IA pour les entreprises. Basé à Abidjan.",
     type: "website",
+    images: ["/portrait.png"],
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={inter.variable}>
+    <html lang="fr" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   );

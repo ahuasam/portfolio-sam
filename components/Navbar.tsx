@@ -1,150 +1,97 @@
 "use client";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Download } from "lucide-react";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { EASE } from "./Motion";
 
-const CV_URL = "/CV-AHUA-ANOH-AUGUSTE-SAMUEL.pdf";
-
-const navLinks = [
-  { label: "Accueil",      href: "#home" },
-  { label: "À Propos",     href: "#about" },
-  { label: "Compétences",  href: "#skills" },
-  { label: "Services",     href: "#services" },
-  { label: "Portfolio",    href: "#portfolio" },
-  { label: "Contact",      href: "#contact" },
+const links = [
+  { label: "Profil", href: "#about" },
+  { label: "Expertise", href: "#services" },
+  { label: "Stack", href: "#stack" },
+  { label: "Projets", href: "#work" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {
-  const [scrolled,  setScrolled]  = useState(false);
-  const [menuOpen,  setMenuOpen]  = useState(false);
-  const [active,    setActive]    = useState("home");
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const scrollTo = (href: string) => {
-    const id = href.replace("#", "");
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
-    setActive(id);
-  };
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+  }, [open]);
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -80, opacity: 0 }}
+      <motion.header
+        initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "py-3 backdrop-blur-xl border-b"
-            : "py-5 bg-transparent"
-        }`}
-        style={scrolled ? { background: "rgba(7,11,20,0.85)", borderBottomColor: "rgba(0,212,255,0.1)" } : {}}
+        transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${scrolled ? "bg-paper/85 backdrop-blur-md border-b border-line" : ""}`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="container-x flex h-16 items-center justify-between">
+          <a href="#top" className="font-serif text-2xl leading-none">
+            Samuel Ahua<span className="text-royal">.</span>
+          </a>
 
-          {/* Logo */}
-          <motion.a
-            href="#home"
-            onClick={(e) => { e.preventDefault(); scrollTo("#home"); }}
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-black tracking-wide"
-            style={{
-              background: "linear-gradient(135deg, #00d4ff, #0099ff)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            Portfolio
-          </motion.a>
+          <nav className="hidden md:flex items-center gap-8 text-sm">
+            {links.map((l) => (
+              <a key={l.href} href={l.href} className="link-u text-ink-2 hover:text-ink transition-colors">
+                {l.label}
+              </a>
+            ))}
+          </nav>
 
-          {/* Desktop links — centered */}
-          <div className="hidden md:flex items-center gap-0">
-            {navLinks.map((link) => {
-              const isActive = active === link.href.replace("#", "");
-              return (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
-                  whileHover={{ scale: 1.05 }}
-                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 group ${
-                    isActive ? "text-cyan-400" : "text-gray-300 hover:text-white"
-                  }`}
-                >
-                  {link.label}
-                  <span
-                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 rounded-full transition-all duration-300 ${
-                      isActive ? "w-4/5" : "w-0 group-hover:w-4/5"
-                    }`}
-                    style={{ background: "linear-gradient(90deg, #00d4ff, #0066ff)" }}
-                  />
-                </motion.a>
-              );
-            })}
+          <div className="hidden md:flex items-center gap-5">
+            <a href="/CV-AHUA-ANOH-AUGUSTE-SAMUEL.pdf" download className="text-sm link-u">CV ↓</a>
+            <a href="#contact" className="group inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm text-paper hover:bg-royal transition-colors">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              Disponible
+            </a>
           </div>
 
-          {/* Right — Download CV */}
-          <div className="hidden md:flex items-center gap-3">
-            <motion.a
-              href={CV_URL}
-              download="CV-AHUA-ANOH-AUGUSTE-SAMUEL.pdf"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              className="cv-btn flex items-center gap-2 px-5 py-2 rounded-lg text-white text-sm font-bold"
-            >
-              <Download size={15} />
-              Download CV
-            </motion.a>
-          </div>
-
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2 rounded-lg text-white transition-colors"
-            style={{ background: "rgba(0,212,255,0.08)", border: "1px solid rgba(0,212,255,0.2)" }}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          <button onClick={() => setOpen(!open)} className="md:hidden eyebrow" aria-expanded={open} aria-label="Menu">
+            {open ? "Fermer" : "Menu"}
           </button>
         </div>
-      </motion.nav>
+        <motion.div style={{ scaleX: progress }} className="absolute bottom-0 left-0 right-0 h-px origin-left bg-royal" />
+      </motion.header>
 
-      {/* Mobile menu */}
       <AnimatePresence>
-        {menuOpen && (
+        {open && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[60px] z-40 md:hidden backdrop-blur-xl border-b"
-            style={{ background: "rgba(7,11,20,0.95)", borderBottomColor: "rgba(0,212,255,0.15)" }}
+            initial={{ clipPath: "inset(0 0 100% 0)" }}
+            animate={{ clipPath: "inset(0 0 0% 0)" }}
+            exit={{ clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className="fixed inset-0 z-40 bg-ink text-paper md:hidden pt-24"
           >
-            <div className="flex flex-col p-4 gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
-                  className="px-4 py-3 rounded-lg text-sm font-medium text-gray-300 hover:text-cyan-400 transition-all"
-                  style={{ background: active === link.href.replace("#", "") ? "rgba(0,212,255,0.08)" : "" }}
+            <div className="container-x flex flex-col gap-2">
+              {links.map((l, i) => (
+                <motion.a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + i * 0.06, duration: 0.6, ease: EASE }}
+                  className="font-serif text-5xl py-2 border-b border-white/10"
                 >
-                  {link.label}
-                </a>
+                  <span className="eyebrow text-white/40 mr-4 align-middle">0{i + 1}</span>
+                  {l.label}
+                </motion.a>
               ))}
-              <a
-                href={CV_URL}
-                download="CV-AHUA-ANOH-AUGUSTE-SAMUEL.pdf"
-                className="mt-2 cv-btn px-4 py-3 rounded-lg text-center text-white text-sm font-bold flex items-center justify-center gap-2"
-              >
-                <Download size={15} />
-                Download CV
-              </a>
+              <a href="/CV-AHUA-ANOH-AUGUSTE-SAMUEL.pdf" download className="mt-8 eyebrow text-white/70">Télécharger le CV ↓</a>
             </div>
           </motion.div>
         )}
