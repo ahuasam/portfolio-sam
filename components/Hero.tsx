@@ -81,7 +81,7 @@ export default function Hero() {
               initial={{ clipPath: "inset(100% 0 0 0)" }}
               animate={{ clipPath: "inset(0% 0 0 0)" }}
               transition={{ duration: 1.4, delay: 0.2, ease: EASE }}
-              className="relative aspect-[4/5] overflow-hidden rounded-sm bg-[#c9c9cb]"
+              className="relative aspect-[4/5] overflow-hidden rounded-sm bg-paper-2"
             >
               <motion.div style={{ y: imgY, scale: imgScale }} className="absolute inset-0">
                 <Image

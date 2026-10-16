@@ -8,8 +8,12 @@ import Process from "@/components/Process";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { getProjects } from "@/lib/projects";
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const projects = await getProjects();
   return (
     <main>
       <Navbar />
@@ -17,7 +21,7 @@ export default function Home() {
       <About />
       <Services />
       <Skills />
-      <Portfolio />
+      <Portfolio projects={projects} />
       <Process />
       <Contact />
       <Footer />

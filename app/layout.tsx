@@ -7,7 +7,7 @@ const sans = Geist({ subsets: ["latin"], variable: "--ff-sans" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--ff-mono" });
 
 export const viewport: Viewport = {
-  themeColor: "#ecebe7",
+  themeColor: "#eef4fa",
 };
 
 export const metadata: Metadata = {
