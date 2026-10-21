@@ -9,7 +9,7 @@ export function Reveal({ delay = 0, y = 28, ...props }: HTMLMotionProps<"div"> &
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.9, delay, ease: EASE }}
+      transition={{ duration: 0.7, delay, ease: EASE }}
       {...props}
     />
   );
@@ -24,7 +24,7 @@ export function SplitWords({ text, className, delay = 0, as = "span" }: { text: 
           <motion.span
             className="inline-block"
             variants={{ hidden: { y: "110%" }, show: { y: 0 } }}
-            transition={{ duration: 0.9, delay: delay + i * 0.05, ease: EASE }}
+            transition={{ duration: 0.7, delay: delay + i * 0.04, ease: EASE }}
           >
             {w}&nbsp;
           </motion.span>

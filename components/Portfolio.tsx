@@ -24,11 +24,11 @@ function Card({ p }: { p: Project }) {
         <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-paper-2">
           <motion.div
             variants={{ hidden: { clipPath: "inset(0 0 100% 0)" }, show: { clipPath: "inset(0 0 0% 0)" } }}
-            transition={{ duration: 1, ease: EASE }}
+            transition={{ duration: 0.8, ease: EASE }}
             className="absolute inset-0"
           >
             {p.video && !p.image ? (
-              <video src={p.video} autoPlay muted loop playsInline className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105" />
+              <video src={inView ? p.video : undefined} preload="none" autoPlay muted loop playsInline className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105" />
             ) : (
               <Image src={p.image!} alt={p.title} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105" />
             )}

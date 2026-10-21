@@ -26,7 +26,7 @@ function AbidjanClock() {
 const line = (delay: number) => ({
   initial: { y: "105%" },
   animate: { y: 0 },
-  transition: { duration: 1.1, delay, ease: EASE },
+  transition: { duration: 0.8, delay, ease: EASE },
 });
 
 export default function Hero() {
@@ -41,7 +41,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           className="flex flex-wrap justify-between gap-y-2 eyebrow text-mute border-b border-line pb-4"
         >
           <span>Ingénieur informatique — Développeur — IA</span>
@@ -51,15 +51,15 @@ export default function Hero() {
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 mt-10 md:mt-14 items-end">
           <div className="lg:col-span-7">
             <h1 className="font-serif text-[clamp(3rem,8.4vw,7.6rem)] leading-[0.95] tracking-[-0.03em]">
-              <span className="block overflow-hidden"><motion.span className="block" {...line(0.35)}>Des sites, des apps</motion.span></span>
-              <span className="block overflow-hidden"><motion.span className="block" {...line(0.45)}>et de l&apos;<em className="text-royal">IA</em> qui servent</motion.span></span>
-              <span className="block overflow-hidden"><motion.span className="block" {...line(0.55)}>votre business.</motion.span></span>
+              <span className="block overflow-hidden"><motion.span className="block" {...line(0.1)}>Des sites, des apps</motion.span></span>
+              <span className="block overflow-hidden"><motion.span className="block" {...line(0.18)}>et de l&apos;<em className="text-royal">IA</em> qui servent</motion.span></span>
+              <span className="block overflow-hidden"><motion.span className="block" {...line(0.26)}>votre business.</motion.span></span>
             </h1>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.9, ease: EASE }}
+              transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
               className="mt-10 grid sm:grid-cols-2 gap-8 max-w-2xl"
             >
               <p className="text-ink-2 leading-relaxed">
@@ -80,12 +80,12 @@ export default function Hero() {
             <motion.div
               initial={{ clipPath: "inset(100% 0 0 0)" }}
               animate={{ clipPath: "inset(0% 0 0 0)" }}
-              transition={{ duration: 1.4, delay: 0.2, ease: EASE }}
+              transition={{ duration: 0.9, delay: 0, ease: EASE }}
               className="relative aspect-[4/5] overflow-hidden rounded-sm bg-paper-2"
             >
               <motion.div style={{ y: imgY, scale: imgScale }} className="absolute inset-0">
                 <Image
-                  src="/portrait.png"
+                  src="/portrait.jpg"
                   alt="Portrait de Samuel Ahua"
                   fill
                   priority
@@ -104,7 +104,7 @@ export default function Hero() {
         <motion.dl
           initial="hidden"
           animate="show"
-          variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 1.1 } } }}
+          variants={{ show: { transition: { staggerChildren: 0.08, delayChildren: 0.6 } } }}
           className="mt-16 md:mt-24 grid grid-cols-2 md:grid-cols-4 border-t border-line"
         >
           {stats.map((s, i) => (

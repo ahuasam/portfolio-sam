@@ -19,10 +19,10 @@ export const CATEGORIES = ["Web", "IA", "Design", "Affiches", "Vidéo", "Logicie
 const FILE = "data/projects.json";
 
 const defaults: Project[] = [
-  { id: "giga", title: "GIGA Festival de la Mode 3.0", client: "Dabou", category: "Affiches", year: "2025", desc: "Affiche officielle et déclinaisons pour les réseaux sociaux.", tags: ["Photoshop", "Illustrator", "Print"], image: "/projets/projet-campagne.png" },
+  { id: "giga", title: "GIGA Festival de la Mode 3.0", client: "Dabou", category: "Affiches", year: "2025", desc: "Affiche officielle et déclinaisons pour les réseaux sociaux.", tags: ["Photoshop", "Illustrator", "Print"], image: "/projets/projet-campagne.webp" },
   { id: "ecom", title: "Boutique en ligne", client: "Commerce de détail", category: "Web", year: "2025", desc: "E-commerce complet avec paiement mobile money et back-office.", tags: ["Next.js", "Stripe", "MongoDB"], image: "/projets/projet-ecommerce.jpg" },
   { id: "chatbot", title: "Assistant client IA", client: "PME de services", category: "IA", year: "2025", desc: "Chatbot qui répond 24 h/24 aux questions fréquentes et transfère les cas complexes.", tags: ["Python", "OpenAI", "FastAPI"], image: "/projets/projet-chatbot.png" },
-  { id: "korha", title: "Korha Création", client: "Mode & lifestyle", category: "Design", year: "2024", desc: "Identité visuelle complète : logo, charte, packaging.", tags: ["Branding", "Illustrator"], image: "/projets/projet-brand.png" },
+  { id: "korha", title: "Korha Création", client: "Mode & lifestyle", category: "Design", year: "2024", desc: "Identité visuelle complète : logo, charte, packaging.", tags: ["Branding", "Illustrator"], image: "/projets/projet-brand.webp" },
   { id: "medecin", title: "Cabinet médical", client: "Santé", category: "Web", year: "2024", desc: "Site responsive avec prise de rendez-vous en ligne.", tags: ["Next.js", "Tailwind", "Prisma"], image: "/projets/projet-medecin.png" },
   { id: "video", title: "Lancement produit", client: "Start-up tech", category: "Vidéo", year: "2024", desc: "Motion design et montage pour la campagne de lancement.", tags: ["After Effects", "Premiere Pro"], video: "/projets/projet-video.mp4" },
   { id: "dashboard", title: "Tableau de bord analytique", client: "Distribution", category: "Web", year: "2024", desc: "Visualisation des ventes et des stocks en temps réel.", tags: ["React", "D3.js", "Node.js"], image: "/projets/projet-dashboard.jpg" },

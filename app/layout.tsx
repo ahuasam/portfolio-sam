@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "@/components/Providers";
 
 const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--ff-serif" });
 const sans = Geist({ subsets: ["latin"], variable: "--ff-sans" });
@@ -20,14 +21,19 @@ export const metadata: Metadata = {
     title: "Samuel Ahua — Développeur web & solutions IA",
     description: "Sites, applications et outils IA pour les entreprises. Basé à Abidjan.",
     type: "website",
-    images: ["/portrait.png"],
+    images: ["/portrait.jpg"],
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <noscript>
+          <style>{`[style*="opacity: 0"],[style*="opacity:0"]{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
+        </noscript>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

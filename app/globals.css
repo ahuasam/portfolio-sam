@@ -5,7 +5,7 @@
   --color-paper-2: #dde9f5;
   --color-ink: #0d1726;
   --color-ink-2: #3f4c5e;
-  --color-mute: #7b8899;
+  --color-mute: #526173;
   --color-line: #c5d6e8;
   --color-royal: #2b8ae6;
   --color-night: #0b1d36;
@@ -55,6 +55,6 @@ body::before {
 .marquee-wrap:hover .marquee { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee { animation: none; }
+  .marquee, .animate-ping, .animate-pulse { animation: none; }
   html { scroll-behavior: auto; }
 }
